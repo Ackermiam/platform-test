@@ -42,8 +42,6 @@ export class Logic {
 
     this.scene.add(this.mesh);
 
-
-
     ref.appendChild(this.renderer.domElement);
 
     this.midHeight = window.innerHeight / 2;
@@ -61,9 +59,9 @@ export class Logic {
   }
 
   move() {
-    if (leftOrRight.value === 'd') {
+    if (leftOrRight.value === "d") {
       this.mesh.rotateY(0.01);
-    } else if (leftOrRight.value === 'g') {
+    } else if (leftOrRight.value === "g") {
       this.mesh.rotateY(-0.01);
     }
   }
