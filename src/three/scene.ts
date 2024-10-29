@@ -6,11 +6,8 @@ import {
   BoxGeometry,
   Mesh,
   MeshBasicMaterial,
+  Vector3
 } from "three";
-
-import { useCursor } from "../utils/calcCursor";
-
-const { calcXAxis, leftOrRight } = useCursor();
 
 export class Logic {
   scene: Scene;
@@ -20,9 +17,11 @@ export class Logic {
   midHeight: number;
   midWidth: number;
   xPos: number;
+  yPos: number;
 
   constructor(ref: HTMLElement) {
     this.xPos = 0;
+    this.yPos = 0;
     this.scene = new Scene();
     this.camera = new PerspectiveCamera(
       45,
@@ -43,7 +42,8 @@ export class Logic {
     this.scene.add(this.mesh);
 
     window.addEventListener("mousemove", (e) => {
-      this.xPos = e.clientX;
+      this.xPos = (e.clientX / window.innerWidth) * 2 - 1;
+      this.yPos = (e.clientY / window.innerHeight) * 2 - 1;
     });
 
     ref.appendChild(this.renderer.domElement);
@@ -56,23 +56,16 @@ export class Logic {
 
   tick() {
     this.renderer.render(this.scene, this.camera);
-    this.detectMove();
+    this.movePlatform();
     requestAnimationFrame(() => {
       this.tick();
     });
   }
 
-  move() {
-    if (leftOrRight.value === "d") {
-      this.mesh.rotateY(0.01);
-    } else if (leftOrRight.value === "g") {
-      this.mesh.rotateY(-0.01);
-    }
-  }
-
-  detectMove() {
-    calcXAxis(this.xPos);
-    this.move();
+  movePlatform() {
+    const rotationY = this.xPos * (Math.PI / 2)
+    const rotationX = this.yPos * (Math.PI / 2)
+    this.mesh.rotation.setFromVector3(new Vector3(rotationX / 10 + .3, rotationY / 1.3, 0))
   }
 
   moveOnClick() {
