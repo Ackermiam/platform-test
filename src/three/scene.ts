@@ -42,11 +42,7 @@ export class Logic {
 
     this.scene.add(this.mesh);
 
-    window.addEventListener("mousemove", (e) => {
-      this.xPos = e.clientX;
-      calcXAxis(this.xPos);
-      this.move();
-    });
+
 
     ref.appendChild(this.renderer.domElement);
 
@@ -58,7 +54,7 @@ export class Logic {
 
   tick() {
     this.renderer.render(this.scene, this.camera);
-
+    this.detectMove();
     requestAnimationFrame(() => {
       this.tick();
     });
@@ -70,6 +66,14 @@ export class Logic {
     } else if (leftOrRight.value === 'g') {
       this.mesh.rotateY(-0.01);
     }
+  }
+
+  detectMove() {
+    window.addEventListener("mousemove", (e) => {
+      this.xPos = e.clientX;
+      calcXAxis(this.xPos);
+      this.move();
+    });
   }
 
   moveOnClick() {
