@@ -50,6 +50,7 @@ export class Logic {
 
     this.midHeight = window.innerHeight / 2;
     this.midWidth = window.innerWidth / 2;
+    
     this.tick();
   }
 
