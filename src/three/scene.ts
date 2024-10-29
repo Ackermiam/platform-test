@@ -42,6 +42,10 @@ export class Logic {
 
     this.scene.add(this.mesh);
 
+    window.addEventListener("mousemove", (e) => {
+      this.xPos = e.clientX;
+    });
+
     ref.appendChild(this.renderer.domElement);
 
     this.midHeight = window.innerHeight / 2;
@@ -67,11 +71,8 @@ export class Logic {
   }
 
   detectMove() {
-    window.addEventListener("mousemove", (e) => {
-      this.xPos = e.clientX;
-      calcXAxis(this.xPos);
-      this.move();
-    });
+    calcXAxis(this.xPos);
+    this.move();
   }
 
   moveOnClick() {
