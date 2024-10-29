@@ -6,7 +6,7 @@ import {
   BoxGeometry,
   Mesh,
   MeshBasicMaterial,
-  Vector3
+  Vector3,
 } from "three";
 
 export class Logic {
@@ -50,7 +50,6 @@ export class Logic {
 
     this.midHeight = window.innerHeight / 2;
     this.midWidth = window.innerWidth / 2;
-
     this.tick();
   }
 
@@ -63,9 +62,11 @@ export class Logic {
   }
 
   movePlatform() {
-    const rotationY = this.xPos * (Math.PI / 2)
-    const rotationX = this.yPos * (Math.PI / 2)
-    this.mesh.rotation.setFromVector3(new Vector3(rotationX / 10 + .3, rotationY / 1.3, 0))
+    const rotationY = this.xPos * (Math.PI / 2);
+    const rotationX = this.yPos * (Math.PI / 2);
+    this.mesh.rotation.setFromVector3(
+      new Vector3(rotationX / 10 + 0.3, rotationY / 1.3, 0)
+    );
   }
 
   moveOnClick() {
